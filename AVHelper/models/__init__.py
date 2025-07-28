@@ -10,5 +10,7 @@ from .video import Video
 from .post import Post
 from .trend import Trend
 from .media_directory import MediaDirectory, PathType
+from .media import Media
+from .series import Series
 
-__all__ = ["Actress", "Video", "Post", "Trend", "MediaDirectory", "PathType"]
+__all__ = ["Actress", "Video", "Post", "Trend", "MediaDirectory", "PathType", "Media", "Series"]

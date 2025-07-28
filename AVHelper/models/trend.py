@@ -6,17 +6,7 @@ Flexible JSON-based structure for tracking statistics over time
 from typing import Dict, Any, Optional
 from datetime import datetime
 from sqlmodel import SQLModel, Field, Column
-from sqlalchemy import JSON
-from sqlalchemy.dialects.postgresql import JSONB
-import os
-
-
-def get_json_column():
-    """Get appropriate JSON column type based on database URL"""
-    db_url = os.getenv("DATABASE_URL", "sqlite://")
-    if "postgresql" in db_url:
-        return JSONB
-    return JSON
+from ..database import get_json_column
 
 
 class Trend(SQLModel, table=True):

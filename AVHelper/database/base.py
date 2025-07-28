@@ -4,6 +4,17 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Generic
 from datetime import datetime
 from sqlmodel import Session, SQLModel, select, func
+from sqlalchemy import JSON
+from sqlalchemy.dialects.postgresql import JSONB
+import os
+
+
+def get_json_column():
+    """Get appropriate JSON column type based on database URL"""
+    db_url = os.getenv("DATABASE_URL", "sqlite://")
+    if "postgresql" in db_url:
+        return JSONB
+    return JSON
 
 T = TypeVar('T', bound=SQLModel)
 
