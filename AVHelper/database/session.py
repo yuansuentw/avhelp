@@ -1,10 +1,8 @@
-"""
-Database configuration and utilities for AVHelper
-Supports both SQLite and PostgreSQL
-"""
+"""Database session management for AVHelper"""
 
-from typing import Optional
-from sqlmodel import SQLModel, create_engine, Session
+from contextlib import contextmanager
+from typing import Generator, Optional
+from sqlmodel import SQLModel, Session, create_engine
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
 import sqlite3
@@ -59,3 +57,47 @@ class DatabaseManager:
 # Default database path for development
 DEFAULT_DB_PATH = "../Shared/DEV_DB/avhelper.sqlite"
 DEFAULT_DATABASE_URL = f"sqlite:///{DEFAULT_DB_PATH}"
+
+
+class DatabaseSession:
+    """資料庫會話管理器"""
+    
+    def __init__(self, database_url: str = DEFAULT_DATABASE_URL):
+        self.db_manager = DatabaseManager(database_url)
+        # 確保資料表已建立
+        self.db_manager.create_tables()
+    
+    @contextmanager
+    def get_session(self) -> Generator[Session, None, None]:
+        """獲取資料庫會話的上下文管理器"""
+        session = self.db_manager.get_session()
+        try:
+            yield session
+            session.commit()
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
+    
+    def get_raw_session(self) -> Session:
+        """獲取原始資料庫會話（需要手動管理）"""
+        return self.db_manager.get_session()
+
+
+# 全域資料庫會話實例
+_db_session = None
+
+
+def get_database_session() -> DatabaseSession:
+    """獲取全域資料庫會話實例"""
+    global _db_session
+    if _db_session is None:
+        _db_session = DatabaseSession()
+    return _db_session
+
+
+def set_database_url(database_url: str) -> None:
+    """設定資料庫 URL（重新初始化會話）"""
+    global _db_session
+    _db_session = DatabaseSession(database_url)

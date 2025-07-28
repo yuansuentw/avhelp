@@ -5,7 +5,7 @@ from strawberry.fastapi import GraphQLRouter
 import strawberry
 
 from .resolvers import Query, Mutation
-from models.database import DatabaseManager, DEFAULT_DATABASE_URL
+from database import DatabaseManager, DEFAULT_DATABASE_URL
 
 
 # 創建 GraphQL schema

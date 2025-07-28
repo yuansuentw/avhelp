@@ -5,8 +5,7 @@ import strawberry
 from strawberry.types import Info
 from sqlmodel import Session
 
-from models.database import DatabaseManager
-from .repositories import ActressRepository, VideoRepository
+from database import get_database_session, create_repositories_with_session
 from .schema import (
     ActressType, ActressInput, ActressFilter,
     VideoType, VideoInput, VideoFilter,
@@ -29,13 +28,10 @@ class VideoPaginatedResult:
     pagination: PaginationInfo
 
 
-def get_db_session() -> Session:
-    """獲取數據庫會話"""
-    # 這裡應該從依賴注入或上下文中獲取
-    # 暫時使用默認配置
-    from models.database import DEFAULT_DATABASE_URL
-    db_manager = DatabaseManager(DEFAULT_DATABASE_URL)
-    return db_manager.get_session()
+def get_db_session():
+    """獲取數據庫會話上下文管理器"""
+    db_session = get_database_session()
+    return db_session.get_session()
 
 
 def actress_to_type(actress) -> ActressType:
@@ -93,7 +89,8 @@ class Query:
     def actress(self, id: int) -> Optional[ActressType]:
         """根據 ID 獲取單個 Actress"""
         with get_db_session() as session:
-            repo = ActressRepository(session)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_actress_repository()
             actress = repo.get_by_id(id)
             return actress_to_type(actress) if actress else None
     
@@ -106,8 +103,12 @@ class Query:
     ) -> ActressPaginatedResult:
         """獲取 Actress 列表，支援分頁和過濾"""
         with get_db_session() as session:
-            repo = ActressRepository(session)
-            actresses, total_count = repo.get_all(page, page_size, filters)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_actress_repository()
+            
+            # 轉換過濾器為字典格式
+            filter_dict = filters.__dict__ if filters else None
+            actresses, total_count = repo.get_all(page, page_size, filter_dict)
             
             actress_types = [actress_to_type(actress) for actress in actresses]
             pagination = PaginationInfo.create(total_count, page, page_size)
@@ -121,7 +122,8 @@ class Query:
     def video(self, id: str) -> Optional[VideoType]:
         """根據 ID 獲取單個 Video"""
         with get_db_session() as session:
-            repo = VideoRepository(session)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_video_repository()
             video = repo.get_by_id(id)
             return video_to_type(video) if video else None
     
@@ -134,8 +136,12 @@ class Query:
     ) -> VideoPaginatedResult:
         """獲取 Video 列表，支援分頁和過濾"""
         with get_db_session() as session:
-            repo = VideoRepository(session)
-            videos, total_count = repo.get_all(page, page_size, filters)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_video_repository()
+            
+            # 轉換過濾器為字典格式
+            filter_dict = filters.__dict__ if filters else None
+            videos, total_count = repo.get_all(page, page_size, filter_dict)
             
             video_types = [video_to_type(video) for video in videos]
             pagination = PaginationInfo.create(total_count, page, page_size)
@@ -154,7 +160,8 @@ class Mutation:
     def create_actress(self, input: ActressInput) -> ActressType:
         """創建新的 Actress"""
         with get_db_session() as session:
-            repo = ActressRepository(session)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_actress_repository()
             actress_data = {
                 k: v for k, v in input.__dict__.items() 
                 if v is not None
@@ -166,7 +173,8 @@ class Mutation:
     def update_actress(self, id: int, input: ActressInput) -> Optional[ActressType]:
         """更新 Actress"""
         with get_db_session() as session:
-            repo = ActressRepository(session)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_actress_repository()
             actress_data = {
                 k: v for k, v in input.__dict__.items() 
                 if v is not None
@@ -178,14 +186,16 @@ class Mutation:
     def delete_actress(self, id: int) -> bool:
         """刪除 Actress（軟刪除）"""
         with get_db_session() as session:
-            repo = ActressRepository(session)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_actress_repository()
             return repo.delete(id)
     
     @strawberry.mutation
     def create_video(self, input: VideoInput) -> VideoType:
         """創建新的 Video"""
         with get_db_session() as session:
-            repo = VideoRepository(session)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_video_repository()
             video_data = {
                 # 映射字段名稱
                 'id': input.id,
@@ -213,7 +223,8 @@ class Mutation:
     def update_video(self, id: str, input: VideoInput) -> Optional[VideoType]:
         """更新 Video"""
         with get_db_session() as session:
-            repo = VideoRepository(session)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_video_repository()
             video_data = {
                 # 映射字段名稱
                 'idSeries': input.id_series,
@@ -240,5 +251,6 @@ class Mutation:
     def delete_video(self, id: str) -> bool:
         """刪除 Video（軟刪除）"""
         with get_db_session() as session:
-            repo = VideoRepository(session)
+            factory = create_repositories_with_session(session)
+            repo = factory.create_video_repository()
             return repo.delete(id)
