@@ -10,4 +10,6 @@ dependencies = [
     "strawberry-graphql>=0.278.0",
     "fastapi>=0.115.0",
     "uvicorn>=0.32.0",
+    "fsspec>=2025.7.0",
+    "smbprotocol>=1.15.0",
 ]

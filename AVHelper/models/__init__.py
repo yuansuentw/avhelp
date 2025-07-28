@@ -9,5 +9,6 @@ from .actress import Actress
 from .video import Video
 from .post import Post
 from .trend import Trend
+from .media_directory import MediaDirectory, PathType
 
-__all__ = ["Actress", "Video", "Post", "Trend"]
+__all__ = ["Actress", "Video", "Post", "Trend", "MediaDirectory", "PathType"]
