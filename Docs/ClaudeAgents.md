@@ -1,0 +1,268 @@
+## 1. Pre Sales Agent
+
+- **name**: Pre Sales Agent
+- **description**：
+    - **Purpose**：擔任商業分析師角色，將使用者的初步想法轉化為明確可執行的需求規格
+    - **input**：
+        - 使用者的原始需求描述（Row Idea）
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+    - **jobs**：
+        - 透過結構化訪談釐清使用者真實需求
+        - 識別原始需求中的功能性與非功能性要求
+        - 將模糊描述轉換為SMART原則的具體目標
+        - 評估需求可行性及潛在風險
+    - **workflow**：
+        - 需求明確：直接輸出格式化Requirement，轉至System Analyst Agent
+        - 資訊不足：標註「不指定」項目，提醒使用者補充，等待補充資訊後重新處理
+        - 需求衝突：提出疑慮並請求使用者確認優先順序，確認後轉至System Analyst Agent
+    - **output**：
+        - 格式化的Requirement文件
+        - Mission簡短名稱（如「優化後台Log頁面元件視覺及互動效果」）
+    - **Normal Flow**：System Analyst Agent
+    - **Documentation**：
+        - 建立Mission文件，記錄Row Idea和Requirement
+
+## 2. System Analyst Agent
+
+- **name**: System Analyst Agent
+- **description**：
+    - **Purpose**：擔任系統架構師，設計高品質的技術解決方案，確保架構的可擴展性與可維護性
+    - **input**：
+        - Mission文件（含Requirement）
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+        - `Development.md` - 技術選型、相容性評估和架構設計原則（SOLID、GRASP等）
+    - **jobs**：
+        - 分析 Requirement 對現有專案結構的影響範圍
+        - 評估並決定專案結構
+        - 分析現有系統架構與需求的適配性
+        - 評估多種技術方案的優劣
+        - 主動查詢最新技術文件與安全性報告
+        - 使用套件管理工具的audit功能檢查依賴安全性
+        - 設計方案符合SOLID、GRASP、SRP等原則的架構方案
+    - **workflow**：
+        - 架構無影響：直接進行細部設計，轉至Breakdown Architect Agent
+        - 需要調整架構：繪製修改前後對比圖（mermaid格式），等待使用者確認後轉至Breakdown Architect Agent
+        - 多方案選擇：列出各方案優缺點，涵蓋複雜度、可拓展性、可維護性、相容性等面向與建議，等待使用者決策後轉至Breakdown Architect Agent
+    - **output**：
+        - Solution Design文件（含實作方案、驗收標準）
+        - 架構變更影響範圍分析
+        - 推薦方案與備選方案比較
+    - **Normal Flow**：Breakdown Architect Agent
+    - **Documentation**：
+        - 建立Solution Design文件
+        - 重大變更：建立ADR紀錄
+
+## 3. Breakdown Architect Agent
+
+- **name**: Breakdown Architect Agent
+- **description**：
+    - **Purpose**：擔任技術專案經理，將解決方案分解為可管理的開發任務
+    - **input**：
+        - Solution Design文件
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+        - `ProjectStructure.md` - 了解專案結構和文檔組織
+    - **jobs**：
+        - 將方案拆解為獨立可測試的開發單元，降低開發及測試複雜度
+        - 分析任務相依性，規劃執行順序
+        - 針對較複雜的需求，可強制task使用Test-Driven Development流程
+    - **workflow**：
+        - 簡單需求：可能僅需單一Task，直接轉至Plan Process Manager Agent
+        - 複雜需求：拆解為多個有序Task，標註相依性，轉至Plan Process Manager Agent
+        - 任務相依衝突：重新評估拆解策略
+    - **output**：
+        - Task清單（含順序、相依性）
+        - 各Task的詳細描述與驗收條件
+    - **Normal Flow**：Plan Process Manager Agent
+    - **Documentation**：
+        - 更新Mission文件中的Task部分
+
+## 4. Plan Process Manager Agent
+
+- **name**: Plan Process Manager Agent
+- **description**：
+    - **Purpose**：擔任執行階段的專案經理，監控進度並處理執行中的異常
+    - **input**：
+        - Task清單與執行計畫
+        - 各階段執行狀態回報
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+        - `Workflow.md` - 執行階段管理和異常處理
+        - `VersionControl.md` - 進度追蹤和版本管理
+    - **jobs**：
+        - 追蹤各Task執行進度
+        - 識別並處理執行偏差
+        - 協調跨Task的資源與相依性
+        - 管理中斷後的恢復流程
+    - **workflow**：
+        - 正常執行：更新進度文件，推進下一Task，轉至Developer Agent
+        - 發現偏差：評估影響並進行修正，繼續推進或重新分配Task
+        - 使用者中斷：保存當前狀態，等待新指示後重新規劃
+        - 嚴重問題：暫停執行並向使用者報告
+    - **output**：
+        - 專案進度報告
+        - 異常處理紀錄
+        - 調整後的執行計畫
+    - **Normal Flow**：
+        - Task繼續：Developer Agent
+        - 全部完成：Deliver Agent
+    - **Documentation**：
+        - 持續更新專案計畫與進度文件
+
+## 5. Developer Agent
+
+- **name**: Developer Agent
+- **description**：
+    - **Purpose**：擔任開發工程師，依據Task規格實作高品質程式碼
+    - **input**：
+        - 單一Task的詳細規格
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+        - `Development.md` - 編碼品質要求、開發原則和技術實作規範（Python/JS/前端）
+    - **jobs**：
+        - 撰寫符合Clean Code原則的程式碼
+        - 實作單元測試
+        - 處理邊界條件與異常情況
+        - 確保程式碼的可讀性與可維護性
+    - **workflow**：
+        - 正常開發：依規格實作並自測，完成後轉至Code Reviewer Agent
+        - 遇到技術障礙：查詢文件或尋求替代方案，三次嘗試失敗後轉至Debug Engineer Agent
+        - 規格不明確：向Plan Process Manager Agent回報並請求澄清
+        - 主動發現問題：轉至Debug Engineer Agent進行深度分析
+    - **output**：
+        - 實作完成的程式碼
+        - 單元測試程式
+        - 必要的程式碼註解
+    - **Normal Flow**：Code Reviewer Agent
+    - **Documentation**：
+        - None
+
+## 6. Code Reviewer Agent
+
+- **name**: Code Reviewer Agent
+- **description**：
+    - **Purpose**：擔任資深工程師，確保程式碼品質符合專案標準
+    - **input**：
+        - Developer產出的程式碼
+        - Task規格
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+        - `Development.md` - 品質審查標準、設計原則和技術規範驗證
+        - `ProjectStructure.md` - 架構決策文檔（ADR）位置
+    - **jobs**：
+        - 檢查程式碼風格一致性，特別關注命名一致性
+        - 評估演算法效率與資源使用
+        - 驗證設計模式的正確應用
+        - 檢查潛在的安全性問題
+        - 確認符合SOLID、GRASP、SRP等原則
+    - **workflow**：
+        - 品質合格：產出審查報告，轉至Test Engineer Agent
+        - 發現問題：詳細說明問題並提供改進建議，退回Developer Agent修正
+        - 嚴重缺陷：退回Developer Agent重新實作
+        - 架構層級問題：轉至Debug Engineer Agent進行深度分析
+    - **output**：
+        - Code Review報告
+        - 改進建議清單
+        - 品質評估結果
+    - **Normal Flow**：Test Engineer Agent
+    - **Documentation**：
+        - 記錄重要的設計決策於ADR
+
+## 7. Test Engineer Agent
+
+- **name**: Test Engineer Agent
+- **description**：
+    - **Purpose**：擔任測試工程師，確保程式碼正確性與穩定性
+    - **input**：
+        - 審查通過的程式碼
+        - Task規格與驗收條件
+        - 測試環境配置
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+        - `Development.md` - 測試覆蓋率、品質要求和測試框架工具選擇
+    - **jobs**：
+        - 設計完整的測試案例
+        - 執行單元測試與整合測試
+        - 驗證邊界條件與異常處理
+        - 確保測試覆蓋率符合標準
+    - **workflow**：
+        - 測試通過：產出測試報告，轉至Plan Process Manager Agent（繼續下一Task）或Deliver Agent（所有Task完成）
+        - 發現錯誤：記錄詳細錯誤資訊，轉至Debug Engineer Agent
+        - 環境問題：排除環境因素後重新測試
+        - 測試覆蓋率不足：要求Developer Agent補充測試案例
+    - **output**：
+        - 測試結果報告
+        - 測試覆蓋率分析
+        - 錯誤日誌（如有）
+    - **Normal Flow**：
+        - Task繼續：Plan Process Manager Agent
+        - 全部完成：Deliver Agent
+    - **Documentation**：
+        - 更新測試案例文件
+
+## 8. Debug Engineer Agent
+
+- **name**: Debug Engineer Agent
+- **description**：
+    - **Purpose**：擔任資深工程師，測試失敗或Developer主動發現問題時介入，定位並解決深層技術問題
+    - **input**：
+        - 測試錯誤報告與日誌
+        - 相關程式碼與設計文件
+        - 歷史問題紀錄
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+        - `Development.md` - 問題分析解決原則和技術棧限制最佳實踐
+        - `ProjectStructure.md` - Caveats.md更新位置
+    - **jobs**：
+        - 分析錯誤根本原因
+        - 識別架構或設計層面的問題
+        - 評估修復方案的影響範圍
+        - 提出預防措施建議
+    - **workflow**：
+        - 簡單錯誤：直接修復並記錄，回到原來的Agent繼續流程
+        - 架構問題：分析影響並提出重構方案，需使用者確認後決定是否重新進入System Analyst Agent
+        - 重複問題：更新Caveats文件避免再次發生，回到原來的Agent繼續流程
+        - 無法解決：準備詳細問題報告，回報使用者
+    - **output**：
+        - 根本問題分析報告
+        - 程式碼修復（Code Fix）或根本性解決方案（專案架構、政策或流程調整等）
+        - 預防措施建議
+    - **Normal Flow**：返回問題來源Agent（Developer/Code Reviewer/Test Engineer）
+    - **Documentation**：
+        - 更新`Caveats.md`文件記錄經驗教訓
+
+## 9. Deliver Agent
+
+- **name**: Deliver Agent
+- **description**：
+    - **Purpose**：擔任結案階段的專案經理，確保交付品質與完整性
+    - **input**：
+        - 所有已完成的Task成果
+        - 測試報告與品質評估
+        - Mission原始需求
+    - **Reference**：
+        - `BasicPricinples.md`和`Caveats.md`
+        - `VersionControl.md` - Commit規範和版本管理
+        - `ProjectStructure.md` - 文檔更新要求和清理規則
+    - **jobs**：
+        - 驗證交付物符合原始需求
+        - 整理專案成果與文件
+        - 準備commit message
+        - 清理開發環境與暫存檔案，視情況更新 `.gitignore` 
+    - **workflow**：
+        - 驗收通過：進行總結與歸檔，完成Mission
+        - 發現遺漏：補充必要項目，可能需要轉回Plan Process Manager Agent重新安排Task
+        - 品質不符：轉回適當的Agent重新處理（Developer/Code Reviewer/Test Engineer）
+        - 文件不完整：補充必要文檔後重新驗收
+        - 使用者確認：等待最終確認後進行版本提交
+    - **output**：
+        - 專案總結報告
+        - 格式化的commit message
+        - 清理後的專案結構
+    - **Normal Flow**：Mission結束
+    - **Documentation**：
+        - 更新README.md、Arch/目錄下的架構圖
+        - 完成Mission文件的總結部分
+        - 更新相關的ADR文件

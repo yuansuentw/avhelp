@@ -1,0 +1,111 @@
+關鍵問題：
+  fc2的上傳者，要視為vendor還是actress
+
+目的
+- 追蹤新片，提出有吸引力的新影片
+  - 透過追蹤特定網站下載數量及觀看數量
+  - 加上動態篩選條件，如首日下載量超越平均值三個標準差，連三日上升，或持續罷榜10天等
+
+
+- 同步library
+  - 依照檔名辨識vid
+  - 自動依照樣板修改檔名
+  - 依照檔案hash建立映射
+  - 動態加入追蹤目錄
+
+- 自定義喜歡追蹤的女優
+
+- 強力推薦+追蹤新片，自動跳出推薦提示
+
+Realize:
+- 從各大網站下載目錄，解析後生成vid和actress_id
+- 自動抓取新片和女優資訊
+- 自動抓取各大網站影片連結
+
+
+組件
+- Scraper：蒐集影片資訊，包含封面圖檔
+- LibraryKeeper
+  - scaner
+
+
+
+model
+- actress:
+  - name
+  - body_desc
+  - memo
+  - fake_boobs
+  - national
+  - birthday
+  - bloodtype
+  - social_media
+  - agency_history
+  - profile
+  - status
+  - type: social_media | adult | 寫真
+
+- msg_templates
+  - message
+  - apply_to
+
+- vendor
+  - name
+  - type: stream | film_studio | individual | jimusho
+  - source_order
+
+
+- video:
+  - actress
+  - vender
+  - publisher - only for fc2, pornhub...
+  - series
+  - series_no
+  - pub_date
+  - playtime
+  - title
+  - hashtags
+  
+- video_preference:
+  - is_ignore
+  - download
+     - time
+     - version: [source]
+     - reason
+  - data_date
+
+- actress_preference:
+  - default_action:
+  - rating:
+
+- sources
+  - id
+  - vid
+  - url
+  - feature
+
+- trend
+  - source_id
+  - views
+  - likes
+  - downloads
+  - seeder
+  - leecher
+  - data_time
+
+
+
+- library_settings
+  - paths
+    - sorting: rules
+  - global
+
+- library_files
+  - path
+  - size
+  - add_time
+  - deleted
+  - delete_reason
+  - source
+  - file_identity
+  
