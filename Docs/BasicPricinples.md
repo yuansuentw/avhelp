@@ -11,5 +11,11 @@ v0.0.1, last update：2025/7/27
 5. 無論何時，均應啟用深度思考模式。
 6. 不需處理的信息：忽略 formatter 或 linter 等輔助程式中單純對於排版的警告，僅處理語法錯誤或 Deprecated 等對於程式運行可能造成直接影響的問題。
 7. 永遠閱讀Caveats.md並將教訓熟記。
-8. 直接接收到使用者問題時，先報告解決方案，生成解決方案時think harder，然後待使用者明確指示執行後，才可以開始修改或撰寫。
-9. 其餘職責，依照Agent定義處理。
+8. 直接接收到使用者問題時，先報告解決方案，生成解決方案時think harder，然後待使用者明確指示執行後，才可以開始修改或撰寫。**特別是Plan Process Manager Agent和Deliver Agent在關鍵階段必須主動向使用者報告並等待確認。**
+9. **強制報告機制**：以下情況必須向使用者主動報告並等待確認：
+   - Plan Process Manager Agent開始執行階段時
+   - 任何Agent發現異常或偏差時
+   - Deliver Agent進行最終驗收時
+   - 重要技術決策或架構變更時
+10. **文檔維護強制要求**：所有Agent必須確實執行Documentation職責，特別是Mission文件的建立和更新。
+11. 其餘職責，依照Agent定義處理。

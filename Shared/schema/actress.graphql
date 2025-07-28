@@ -1,0 +1,60 @@
+"""
+GraphQL schema definition for Actress type
+"""
+
+type Actress {
+  id: Int!
+  name: String
+  rating: String
+  face: String
+  style: String
+  breast: String
+  waist: String
+  legs: String
+  body: String
+  hair: String
+  features: String
+  roleType: String
+  common: String
+  isDelete: Boolean
+  dataDate: DateTime
+  updateDate: DateTime
+  alias: String
+}
+
+input ActressInput {
+  name: String
+  rating: String
+  face: String
+  style: String
+  breast: String
+  waist: String
+  legs: String
+  body: String
+  hair: String
+  features: String
+  roleType: String
+  common: String
+  isDelete: Boolean
+  dataDate: DateTime
+  updateDate: DateTime
+  alias: String
+}
+
+input ActressFilter {
+  name: String
+  rating: String
+  roleType: String
+  isDelete: Boolean
+}
+
+type Query {
+  actresses(filter: ActressFilter, limit: Int, offset: Int): [Actress!]!
+  actress(id: Int!): Actress
+}
+
+type Mutation {
+  createActress(input: ActressInput!): Actress!
+  updateActress(id: Int!, input: ActressInput!): Actress!
+  deleteActress(id: Int!): Boolean!
+}

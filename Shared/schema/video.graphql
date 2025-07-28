@@ -1,0 +1,73 @@
+"""
+GraphQL schema definition for Video type
+"""
+
+scalar DateTime
+scalar Time
+
+type Video {
+  id: String!
+  idSeries: String
+  idNumber: String
+  dmmId: String
+  javdbId: String
+  pubDate: DateTime
+  duration: Time
+  title: String
+  actressName: String
+  actressId: String
+  rating: Float
+  isDownloaded: Boolean
+  isIgnore: Boolean
+  addDate: DateTime
+  downloadDate: DateTime
+  deleteDate: DateTime
+  deleteReason: String
+  remark: String
+}
+
+input VideoInput {
+  id: String!
+  idSeries: String
+  idNumber: String
+  dmmId: String
+  javdbId: String
+  pubDate: DateTime
+  duration: Time
+  title: String
+  actressName: String
+  actressId: String
+  rating: Float
+  isDownloaded: Boolean
+  isIgnore: Boolean
+  addDate: DateTime
+  downloadDate: DateTime
+  deleteDate: DateTime
+  deleteReason: String
+  remark: String
+}
+
+input VideoFilter {
+  idSeries: String
+  idNumber: String
+  dmmId: String
+  javdbId: String
+  title: String
+  actressName: String
+  actressId: String
+  isDownloaded: Boolean
+  isIgnore: Boolean
+  ratingMin: Float
+  ratingMax: Float
+}
+
+type Query {
+  videos(filter: VideoFilter, limit: Int, offset: Int): [Video!]!
+  video(id: String!): Video
+}
+
+type Mutation {
+  createVideo(input: VideoInput!): Video!
+  updateVideo(id: String!, input: VideoInput!): Video!
+  deleteVideo(id: String!): Boolean!
+}

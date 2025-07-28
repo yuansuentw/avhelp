@@ -7,7 +7,7 @@ Designed for compatibility with both SQLite and PostgreSQL.
 
 from .actress import Actress
 from .video import Video
-from .posts import Post
-from .trends import Trend
+from .post import Post
+from .trend import Trend
 
 __all__ = ["Actress", "Video", "Post", "Trend"]

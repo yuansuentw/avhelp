@@ -31,7 +31,7 @@ v0.0.1, last update：2025/7/27
 - **ProjectStructure.md**：專案結構規範（本文件）。
 - **VersionControl.md**：版本管理規範。
 
-### Missions/
+### Docs/Missions/
 - **YYYYMMDDTHHMM-簡短任務名稱/**
 	- **general_info.md**：含row idea, requirement, solution design, adr, closing summary, commit message等
 	- **progress_status.md**：紀錄plan中的task執行進度
