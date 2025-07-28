@@ -8,4 +8,6 @@ dependencies = [
     "alembic>=1.16.4",
     "sqlmodel>=0.0.24",
     "strawberry-graphql>=0.278.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
 ]
