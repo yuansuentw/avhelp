@@ -14,7 +14,7 @@ from fsspec.implementations.ftp import FTPFileSystem
 from fsspec.implementations.sftp import SFTPFileSystem
 
 from ...models.media_directory import MediaDirectory, PathType
-from ...models.media import Media
+from ...models.media_file import MediaFile
 
 
 logger = logging.getLogger(__name__)
@@ -292,11 +292,11 @@ class MediaDirectoryOperator:
     def scan_and_create_media_objects(self, 
                                     extensions: Optional[List[str]] = None, 
                                     recursive: bool = True,
-                                    progress_callback: Optional[Callable[[int, int, str], None]] = None) -> List[Media]:
-        """掃描目錄並為每個檔案建立Media物件
+                                    progress_callback: Optional[Callable[[int, int, str], None]] = None) -> List[MediaFile]:
+        """掃描目錄並為每個檔案建立MediaFile物件
         
         重用現有的list_all_files和get_file_info方法來掃描檔案，
-        並為每個檔案建立Media物件實例（不包含資料庫操作）
+        並為每個檔案建立MediaFile物件實例（不包含資料庫操作）
         
         Args:
             extensions: 文件擴展名過濾列表，如 ['.mp4', '.avi', '.mkv']
@@ -305,7 +305,7 @@ class MediaDirectoryOperator:
             progress_callback: 進度回饋callback函數，接收參數：(current_index, total_files, current_file_path)
             
         Returns:
-            List[Media]: Media物件列表
+            List[MediaFile]: MediaFile物件列表
             
         Raises:
             RuntimeError: 當未連接到文件系統時
@@ -346,8 +346,8 @@ class MediaDirectoryOperator:
                     # 從文件路徑提取檔案名稱
                     filename = Path(file_path).name
                     
-                    # 創建Media物件
-                    media = Media(
+                    # 創建MediaFile物件
+                    media = MediaFile(
                         media_directory=self.media_directory.id,
                         abs_path=file_path,
                         init_filename=filename,
@@ -357,14 +357,14 @@ class MediaDirectoryOperator:
                     )
                     
                     media_objects.append(media)
-                    logger.debug(f"Created Media object for {filename} ({current_index}/{total_files})")
+                    logger.debug(f"Created MediaFile object for {filename} ({current_index}/{total_files})")
                     
                 except Exception as e:
-                    logger.error(f"Failed to create Media object for {file_path}: {e}")
+                    logger.error(f"Failed to create MediaFile object for {file_path}: {e}")
                     # 繼續處理其他文件，不中斷整個掃描過程
                     continue
             
-            logger.info(f"Successfully created {len(media_objects)} Media objects out of {total_files} files")
+            logger.info(f"Successfully created {len(media_objects)} MediaFile objects out of {total_files} files")
             return media_objects
             
         except Exception as e:

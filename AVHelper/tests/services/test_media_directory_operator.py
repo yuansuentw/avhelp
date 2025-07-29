@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "AVHelper"))
 
 from services.MediaLibrary.media_directory_operator import MediaDirectoryOperator
 from models.media_directory import MediaDirectory, PathType
-from models.media import Media
+from models.media_file import MediaFile
 
 
 class TestMediaDirectoryOperatorScanAndCreateMediaObjects:
@@ -124,9 +124,9 @@ class TestMediaDirectoryOperatorScanAndCreateMediaObjects:
         assert isinstance(result, list)
         assert len(result) == 7  # All files should be processed
         
-        # Check that all results are Media objects
+        # Check that all results are MediaFile objects
         for media in result:
-            assert isinstance(media, Media)
+            assert isinstance(media, MediaFile)
             assert media.media_directory == operator.media_directory.id
             assert media.abs_path in mock_file_list
             assert media.init_filename is not None
@@ -267,7 +267,7 @@ class TestMediaDirectoryOperatorScanAndCreateMediaObjects:
         # Verify all default format files are processed
         assert len(result) == 5
         for media in result:
-            assert isinstance(media, Media)
+            assert isinstance(media, MediaFile)
             assert media.abs_path in default_format_files
 
     @patch.object(MediaDirectoryOperator, 'list_all_files')

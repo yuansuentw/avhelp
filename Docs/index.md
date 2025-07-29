@@ -9,7 +9,7 @@ v0.0.1, last update：2025/7/29
 - `Arch/`：架構相關文檔，例如系統架構、數據庫設計、微服務關係、部署需求等
 - `Caveats.md`：**注意事項及血淚教訓** - 記錄開發過程中遇到的技術陷阱、行為規範和經驗教訓，避免重複踩坑。
 - `Guidelines/`
-	- `BasicPricinples.md`：**Agent基本準則** - 所有Agent必須遵循的基本工作原則，包含語言統一、深度思考模式、問題解決方法等核心準則
+	- `Pricinples.md`：**Agent基本準則** - 所有Agent必須遵循的基本工作原則，包含語言統一、深度思考模式、問題解決方法等核心準則
 	- `ClaudeAgents.md`：**Agent定義與協作流程**
 	- `Workflow.md`：**專案工作流程** - 定義Mission生命週期和三大階段（Plan、Execution、Delivery）的完整工作流程
 	- `VersionControl.md`：**版本管理規範** - Git工作流程、commit message規範、版本號規則等版本

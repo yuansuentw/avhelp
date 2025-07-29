@@ -12,3 +12,6 @@ AVHelper/.venv
 /TASK*_IMPLEMENTATION_SUMMARY.md
 /simple_test.py
 /usage_example.py
+
+
+.vercel
