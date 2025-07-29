@@ -23,7 +23,7 @@ tools: Read, Grep, Write
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Guidelines/Caveats.md`
 
 ## 文檔維護
 - 建立Mission文件，記錄Row Idea和Requirement

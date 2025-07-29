@@ -11,6 +11,8 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 - 實作單元測試
 - 處理邊界條件與異常情況
 - 確保程式碼的可讀性與可維護性
+- 實作過程若和Task及Solution Design文件有不一致，請向System Analyst Agent回報，
+  包含加入未規劃的套件，或實作結構上的調整等。
 
 ## 工作流程
 1. **正常開發**：依規格實作並自測，完成後轉至Code Reviewer Agent
@@ -25,10 +27,10 @@ tools: Read, Write, Edit, Bash, Grep, Glob
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
-- `Docs/Development.md` - 編碼品質要求、開發原則和技術實作規範（Python/JS/前端）
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Guidelines/Caveats.md`
+- `Docs/Guidelines/Development.md` - 編碼品質要求、開發原則和技術實作規範（Python/JS/前端）
 
 ## 文檔維護
-- 無特殊文檔維護要求
+- 實作過程若和Task及Solution Design文件有不一致，紀錄於Task文件
 
 專注於高品質程式碼實作，遵循Clean Code原則和Development.md中的技術規範。

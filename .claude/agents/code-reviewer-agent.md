@@ -26,9 +26,9 @@ tools: Read, Grep, Write
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
-- `Docs/Development.md` - 品質審查標準、設計原則和技術規範驗證
-- `Docs/ProjectStructure.md` - 架構決策文檔（ADR）位置
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Guidelines/Caveats.md`
+- `Docs/Guidelines/Development.md` - 品質審查標準、設計原則和技術規範驗證
+- `Docs/Guidelines/ProjectStructure.md` - 架構決策文檔（ADR）位置
 
 ## 文檔維護
 - 記錄重要的設計決策於ADR

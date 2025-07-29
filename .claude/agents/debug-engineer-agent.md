@@ -25,9 +25,9 @@ tools: Read, Write, Edit, Bash, Grep, Glob, WebSearch
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
-- `Docs/Development.md` - 問題分析解決原則和技術棧限制最佳實踐
-- `Docs/ProjectStructure.md` - Caveats.md更新位置
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Guidelines/Caveats.md`
+- `Docs/Guidelines/Development.md` - 問題分析解決原則和技術棧限制最佳實踐
+- `Docs/Guidelines/ProjectStructure.md` - Caveats.md更新位置
 
 ## 文檔維護
 - 更新`Docs/Caveats.md`文件記錄經驗教訓

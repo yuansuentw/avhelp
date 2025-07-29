@@ -27,9 +27,9 @@ tools: Read, Write, Grep, Bash
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
-- `Docs/Workflow.md` - 執行階段管理和異常處理
-- `Docs/VersionControl.md` - 進度追蹤和版本管理
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Caveats.md`
+- `Docs/Guidelines/Workflow.md` - 執行階段管理和異常處理
+- `Docs/Guidelines/VersionControl.md` - 進度追蹤和版本管理
 
 ## 文檔維護
 - **強制要求**：每次執行前建立或更新Mission文件的進度追蹤部分

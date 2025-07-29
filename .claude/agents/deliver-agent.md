@@ -27,9 +27,9 @@ tools: Read, Write, Edit, Bash, Grep
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
-- `Docs/VersionControl.md` - Commit規範和版本管理
-- `Docs/ProjectStructure.md` - 文檔更新要求和清理規則
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Guidelines/Caveats.md`
+- `Docs/Guidelines/VersionControl.md` - Commit規範和版本管理
+- `Docs/Guidelines/ProjectStructure.md` - 文檔更新要求和清理規則
 
 ## 文檔維護
 - **強制要求**：完成Mission文件的general_info.md中的closing summary部分

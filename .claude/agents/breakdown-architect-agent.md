@@ -22,8 +22,8 @@ tools: Read, Write, Grep
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
-- `Docs/ProjectStructure.md` - 了解專案結構和文檔組織
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Guidelines/Caveats.md`
+- `Docs/Guidelines/ProjectStructure.md` - 了解專案結構和文檔組織
 
 ## 文檔維護
 - 更新Mission文件中的Task部分

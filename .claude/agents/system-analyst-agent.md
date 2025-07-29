@@ -27,11 +27,16 @@ tools: Read, Grep, Write, WebSearch, Bash
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
-- `Docs/Development.md` - 技術選型、相容性評估和架構設計原則（SOLID、GRASP等）
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Guidelines/Caveats.md`
+- `Docs/Guidelines/Development.md` - 技術選型、相容性評估和架構設計原則（SOLID、GRASP等）
 
 ## 文檔維護
-- 建立Solution Design文件
+- 建立Solution Design文件，下面資訊資訊應特別額外列出
+  - 任何新安裝、移除、升級、降級的套件
+  - 任何對已存在組件，進行對外介面或和其他組件交互模式的修改
+  - 任何對已存在組件，進行較大規模的結構更動
+  - 增加任何未來將供其他元件使用的基礎物件，例如資料模型、介面、抽象類別、列舉型態等
+  - 增加或刪除現有檔案
 - 重大變更：建立ADR紀錄
 
 遵循SOLID、GRASP等架構設計原則，重視可擴展性和可維護性，善用Development.md中的技術規範。

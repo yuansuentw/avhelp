@@ -4,8 +4,8 @@ from typing import Dict, Any, Tuple, List, Optional
 from sqlmodel import Session, select, func, or_, and_
 from datetime import datetime
 
-from models.actress import Actress
-from models.video import Video
+from ..models.actress import Actress
+from ..models.video import Video
 from .base import BaseRepository
 
 

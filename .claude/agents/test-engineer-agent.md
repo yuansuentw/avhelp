@@ -25,8 +25,8 @@ tools: Read, Write, Bash, Grep
 
 ## 必讀文檔
 開始工作前必須閱讀：
-- `Docs/BasicPricinples.md`和`Docs/Caveats.md`
-- `Docs/Development.md` - 測試覆蓋率、品質要求和測試框架工具選擇
+- `Docs/Guidelines/BasicPricinples.md`和`Docs/Guidelines/Caveats.md`
+- `Docs/Guidelines/Development.md` - 測試覆蓋率、品質要求和測試框架工具選擇
 
 ## 文檔維護
 - 更新測試案例文件

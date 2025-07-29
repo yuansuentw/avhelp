@@ -1,3 +1,14 @@
 **/__pycache__
 AVHelper/.venv
 **/node_modules
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Test files in root (should be in tests/ directory)
+/test_*.py
+/TASK*_IMPLEMENTATION_SUMMARY.md
+/simple_test.py
+/usage_example.py
