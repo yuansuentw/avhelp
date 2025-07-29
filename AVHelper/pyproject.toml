@@ -14,4 +14,6 @@ dependencies = [
     "smbprotocol>=1.15.0",
     "paramiko>=3.0.0",
     "pytest>=8.0.0",
+    "result>=0.17.0",
+    "pyyaml>=6.0.0",
 ]

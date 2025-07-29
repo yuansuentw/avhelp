@@ -1,0 +1,120 @@
+# Video ID Series Resolution Rules
+# Based on legacy utility_.py solve_vid function
+# Priority: lower number = higher priority
+
+# Caribbeancom/1Pondo - highest priority
+CARIBBEANCOM:
+  priority: 1
+  series:
+    pattern: '(C|c)(arib|ARIB)|カリビ|加勒比'
+    post_process: 'replace'  # Caribbeancom or 1Pondo based on keyword match
+    post_process_args: ['Caribbeancom']
+  splitter:
+    pattern: '(-|_)'
+    post_process: 'replace'  # - for Caribbeancom, _ for 1Pondo
+    post_process_args: ['-']
+  number:
+    pattern: '\d{6}(-|_)\d{3}'
+
+1PONDO:
+  priority: 2
+  series:
+    pattern: '1(P|p)on|一本道'
+    post_process: 'replace'  # Caribbeancom or 1Pondo based on keyword match
+    post_process_args: ['1Pondo']
+  splitter:
+    pattern: '(-|_)'
+    post_process: 'replace'  # - for Caribbeancom, _ for 1Pondo
+    post_process_args: ['_']
+  number:
+    pattern: '\d{6}(-|_)\d{3}'
+
+# FC2
+FC2:
+  priority: 3
+  series:
+    pattern: '(FC2|fc2)(-| |)(PPV|ppv|)'
+    post_process: 'to_uppercase'
+  splitter:
+    pattern: '(-|_|)'
+    post_process: 'replace'  # - for Caribbeancom, _ for 1Pondo
+    post_process_args: ['_']
+  number:
+    pattern: '\d{5,7}'
+    post_process: 'extract_digits_only'
+
+# 10musume
+TEN_MUSUME:
+  priority: 4
+  series:
+    pattern: '10(M|m)(U|u)(sume|)'
+    post_process: 'replace'  # Caribbeancom or 1Pondo based on keyword match
+    post_process_args: ['10musume']
+  splitter:
+    pattern: '(-|_)'
+    post_process: 'replace'  # - for Caribbeancom, _ for 1Pondo
+    post_process_args: ['_']
+  number:
+    pattern: '\d{6}(-|_)\d{2}'
+
+# Heydouga
+HEYDOUGA:
+  priority: 5
+  series:
+    pattern: '(H|h)(eydouga|EYDOUGA)'
+    post_process: 'replace'  # Caribbeancom or 1Pondo based on keyword match
+    post_process_args: ['Heydouga']
+  splitter:
+    pattern: '(-|_)'
+    post_process: 'replace'  # - for Caribbeancom, _ for 1Pondo
+    post_process_args: ['_']
+  number:
+    pattern: '\d{4}(-|_)(PPV|ppv|)\d{3,4}'
+
+# Tokyo-Hot
+TOKYO_HOT:
+  priority: 6
+  series:
+    pattern: '(th|TH)101|(t|T)okyo(-| )(H|h)ot|東京熱'
+    post_process: 'replace'  # Caribbeancom or 1Pondo based on keyword match
+    post_process_args: ['Tokyo-Hot']
+  splitter:
+    pattern: '(-|_| )'
+    post_process: 'replace'  # - for Caribbeancom, _ for 1Pondo
+    post_process_args: ['_']
+  number:
+    pattern: '\d{3}(_|-| )\d{6}'
+
+# H4610
+H4610:
+  priority: 7
+  series:
+    pattern: 'H4610'
+  splitter:
+    pattern: '-'
+  number:
+    pattern: '[A-Za-z0-9]{5,8}'
+
+# HEYZO
+HEYZO:
+  priority: 8
+  series:
+    pattern: '(HEYZO|heyzo)'
+    post_process: 'to_uppercase'
+  splitter:
+    pattern: '(-|_| )'
+    post_process: 'replace'  # - for Caribbeancom, _ for 1Pondo
+    post_process_args: ['_']
+  number:
+    pattern: '\d{3,5}'
+
+# Normal format (general AV codes)
+NORMAL_FORMAT:
+  priority: 21
+  series:
+    pattern: '[0-9]{0,3}[A-Za-z][A-Za-z0-9]{1,4}'
+    post_process: 'to_uppercase'
+  splitter:
+    pattern: '-'
+  number:
+    pattern: '\d{2,5}'
